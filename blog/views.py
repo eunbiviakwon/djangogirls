@@ -1,14 +1,25 @@
 import os
 from django.http import HttpResponse
 from django.shortcuts import render
+from blog.models import Post
 
 
 def post_list(request):
+
+
     #Template을 찾을 경로에서
     # post_list.html을 찾아서
     # 그 파일을 text로 만들어서 httpResponse 형태로 돌려준다
     # 위 기능을 하는 shortcut 함수
-    return render(request, 'post_list.html')
+
+    # content = loader.render_to_string('post_list.html', None, request)
+    # return HttpResponse(content)
+
+    posts = Post.objects.all()
+    context = {
+        'posts': posts,
+    }
+    return render(request, 'post_list.html', context)
 
     # 상위폴더(blog)의
     # 상위폴더(djangogirls)의
