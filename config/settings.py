@@ -14,7 +14,9 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+print('settings.py의 Base_dir:', BASE_DIR)
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+print('settings.py의 TEMPLATES_DIR', TEMPLATES_DIR)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
@@ -57,7 +59,10 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        #기본 설정 외에 template을 찾을 경로 목록
+        'DIRS': [
+            TEMPLATES_DIR,
+                 ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
