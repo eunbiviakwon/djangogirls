@@ -22,8 +22,22 @@ def post_list(request):
     return render(request, 'post_list.html', context)
 
 def post_detail(request):
+    post = Post.objects.all()[0]
+    context = {
+        'post': post,
+    }
 
-    return render(request, 'post_detail.html')
+    return render(request, 'post_detail.html', context)
+
+
+
+
+
+
+
+
+
+
     # 상위폴더(blog)의
     # 상위폴더(djangogirls)의
     # 하위폴더 (templates)의
