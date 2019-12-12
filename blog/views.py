@@ -21,11 +21,27 @@ def post_list(request):
     }
     return render(request, 'post_list.html', context)
 
-def post_detail(request):
-    post = Post.objects.all()[0]
+def post_detail(request, pk):
+    print('post_detail request', request)
+    print('post_detail pk', pk)
+
+    # 이 view 함수의 매개변수로 전달되는 'pk'를 사용해서
+    # 전달받은 'pk'갑싱 자신의 'pk' DB Column값과 같은 Post를 post변수에 지정
+    # 이후 pk에 따라 /post-detail/에 접근했을 때, 다른 Post가 출력되는지 확
+    # posts = Post.objects.filter(pk=pk)
+    # post = posts[0]
+
+    try:
+        post = Post.objects.get(pk=pk)
+
+    except Post.DoesNotExist:
+      return HttpResponse('없음')
+
+
     context = {
-        'post': post,
-    }
+            'post': post,
+        }
+
 
     return render(request, 'post_detail.html', context)
 
