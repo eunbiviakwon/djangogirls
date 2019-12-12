@@ -1,32 +1,41 @@
+<!--html:5[tab]-->
 <!doctype html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
 
-    <link rel="stylesheet" href="/static/bootstrap/bootstrap.css"/>
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="/static/bootstrap/bootstrap.css">
 </head>
 <body>
-    <h1>Post List!</h1>
-    {% for post in posts %}
-        <div>{{post.title}}
-        {{post.author}}
-        {{post.created_date}}
-        {{post.published_date}} </div>
-    {% endfor %}
-<!--    <h1>Post List!</h1>-->
-<!--    <div>-->
-<!--        <p>published: 12.11.2019, 14:38</p>-->
-<!--        <h2><a href="">My first post</a></h2>-->
-<!--        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores atque doloribus ea illo, inventore magni non ut! Adipisci consectetur cumque dolorem dolores et laboriosam maiores molestias nesciunt nostrum, quae vel!</p>-->
-<!--    </div>-->
-<!--    <div>-->
-<!--        <p>published: 12.11.2019, 14:38</p>-->
-<!--        <h2><a href="">My first post</a></h2>-->
-<!--        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Asperiores atque doloribus ea illo, inventore magni non ut! Adipisci consectetur cumque dolorem dolores et laboriosam maiores molestias nesciunt nostrum, quae vel!</p>-->
-<!--    </div>-->
+    <div id="wrap">
+        <nav class="navbar navbar-expand navbar-dark bg-dark">
+            <a href="#" class="navbar-brand">DjangoGirls</a>
+
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">Post List</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <div class="container-fluid pt-2">
+            {% for post in posts %}
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">{{ post.title }}</h5>
+                    <p class="card-text">{{ post.text }}</p>
+                    <div class="text-right">
+                        <span>{{ post.created_date }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
 </body>
 </html>
