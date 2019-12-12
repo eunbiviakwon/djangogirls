@@ -1,6 +1,8 @@
 import os
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse
+
 from blog.models import Post
 
 
@@ -15,7 +17,7 @@ def post_list(request):
     # content = loader.render_to_string('post_list.html', None, request)
     # return HttpResponse(content)
 
-    posts = Post.objects.all()
+    posts = Post.objects.order_by('-pk')
     context = {
         'posts': posts,
     }
@@ -47,6 +49,42 @@ def post_detail(request, pk):
 
 
 def post_add(request):
+    if request.method == 'POST':
+        # request.POST에 담긴 title, text를
+        # HttpResponse를 사용해서 적절히 리턴
+        # title: <입력받은 제목>, text: <입력받은 텍스트>
+        # 위와 같은 문자열을 리턴해주도록 한다.
+
+        # 위 3개의 값을 사용해서
+        # 새로운 Post를 생성
+        # 생성한 Post의 title과 created_date를 HttpResponse에 적절한 문자열로 전달
+
+
+        post = Post.objects.create(
+            author=request.user,
+            title = request.POST['title'],
+            text = request.POST['text'],
+            # created_date = request.POST['created_date'],
+        )
+
+
+        result = f'title: {post.title}, created_date: {post.created_date}'
+        # post_list_url = reverse('url-name-post-list')
+        # return HttpResponseRedirect(post_list_url)
+        return redirect('url-name-post-list')
+
+    else:
+        return render(request, 'post_add.html')
+
+
+    # title = request.Post['title']
+    # text = request.Post['text']
+
+
+    context = {
+        'title': title,
+        'text': text,
+    }
     # URL:    /posts/add
     # View: 이 함수
     # Template: post_add.html
@@ -56,8 +94,6 @@ def post_add(request):
     #base.html의 nav 안에 /posts/add/로의 링크 하나 추가
     # 링크 텍스트: Post Add
 
-
-    return render(request, 'post_add.html')
 
 
 

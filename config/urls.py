@@ -26,3 +26,5 @@ urlpatterns = [
     path('post-detail/<int:pk>', post_detail, name='url-name-post-detail'),
     path('posts/add/', post_add, name='url-name-post-add'),
 ]
+
+
